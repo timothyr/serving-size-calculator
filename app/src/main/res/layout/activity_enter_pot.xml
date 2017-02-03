@@ -33,6 +33,22 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:inputType="textCapWords|textAutoCorrect|textAutoComplete"
+        android:ems="10"
+        android:id="@+id/enterPotName"
+        android:layout_alignParentTop="true"
+        android:layout_alignLeft="@+id/enterPotWeight"
+        android:layout_alignStart="@+id/enterPotWeight"
+        android:hint="@string/pot_name"
+        android:capitalize="words"
+        android:textIsSelectable="true"
+        android:nextFocusDown="@id/enterPotWeight"
+        android:singleLine="true"
+        android:selectAllOnFocus="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
         android:id="@+id/enterPotWeight"
@@ -44,14 +60,5 @@
         android:layout_marginEnd="18dp"
         android:hint="@string/pot_weight" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/enterPotName"
-        android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/enterPotWeight"
-        android:layout_alignStart="@+id/enterPotWeight"
-        android:hint="@string/pot_name" />
+
 </RelativeLayout>

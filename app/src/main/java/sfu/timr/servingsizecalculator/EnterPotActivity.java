@@ -1,7 +1,7 @@
 package sfu.timr.servingsizecalculator;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 public class EnterPotActivity extends AppCompatActivity {
 
@@ -12,4 +12,5 @@ public class EnterPotActivity extends AppCompatActivity {
 
 
     }
+
 }

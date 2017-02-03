@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EnterPotActivity" />
+        <activity android:name=".EnterPotActivity"
+            android:windowSoftInputMode="stateVisible"/>
         <activity android:name=".CalculateServingActivity"></activity>
     </application>
 
