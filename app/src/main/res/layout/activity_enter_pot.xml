@@ -60,5 +60,16 @@
         android:layout_marginEnd="18dp"
         android:hint="@string/pot_weight" />
 
+    <Button
+        android:text="add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/enterPotWeight"
+        android:layout_alignRight="@+id/enterPotWeight"
+        android:layout_alignEnd="@+id/enterPotWeight"
+        android:layout_marginTop="11dp"
+        android:id="@+id/enter_pot_add_button"
+        style="@style/Widget.AppCompat.Button.Colored" />
+
 
 </RelativeLayout>
