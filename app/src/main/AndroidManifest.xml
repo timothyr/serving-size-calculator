@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".EnterPot" />
+        <activity android:name=".EnterPotActivity" />
         <activity android:name=".CalculatePot"></activity>
     </application>
 

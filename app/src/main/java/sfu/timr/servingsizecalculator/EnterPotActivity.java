@@ -3,7 +3,7 @@ package sfu.timr.servingsizecalculator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class EnterPot extends AppCompatActivity {
+public class EnterPotActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

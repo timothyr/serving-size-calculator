@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="sfu.timr.servingsizecalculator.EnterPot">
+    tools:context="sfu.timr.servingsizecalculator.EnterPotActivity">
 
     <TextView
         android:text="@string/pot_name"
