@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".EnterPotActivity" />
-        <activity android:name=".CalculatePot"></activity>
+        <activity android:name=".CalculatePotActivity"></activity>
     </application>
 
 </manifest>

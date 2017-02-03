@@ -3,7 +3,7 @@ package sfu.timr.servingsizecalculator;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class CalculatePot extends AppCompatActivity {
+public class CalculatePotActivity extends AppCompatActivity {
 
     // For use with calculating the serving size in a pot.
     @Override
