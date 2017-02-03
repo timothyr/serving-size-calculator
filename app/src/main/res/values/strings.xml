@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Serving Size Calculator</string>
     <string name="action_settings">Settings</string>
+    <string name="add_pot">Add Pot</string>
+    <string name="title_activity_calculate_pot">CalculatePot</string>
+    <string name="pot_name">Pot Name</string>
+    <string name="pot_weight">Pot Weight (g)</string>
 </resources>
