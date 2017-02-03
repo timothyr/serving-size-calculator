@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".EnterPotActivity"
+            android:label="@string/enter_pot_title"
             android:windowSoftInputMode="stateVisible"/>
         <activity android:name=".CalculateServingActivity"></activity>
     </application>

@@ -6,6 +6,14 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+// Pot collection array
+
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -18,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setupFloatingAddPotButton(R.id.floatingAddPotButton);
 
         populateListView();
+        registerClickCallback();
     }
 
     private void setupFloatingAddPotButton(int buttonId) {
@@ -33,17 +42,36 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    //todo: listview of pots
     private void populateListView() {
         // Create a dynamic list of pots
-        //todo:ArrayList<Pot>[] pots = new ArrayList<Pot>[];
+        PotCollection pots = new PotCollection();
+
+        for(int i = 0; i < 3; i++){
+            Pot pot = new Pot("garbage", i);
+            pots.addPot(pot);
+        }
 
         // Build adapter
-        //todo: ArrayAdapter<Pot> potAdapter = new ArrayAdapter<Pot>(this, R.layout.potcollection, pots);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+                this,
+                R.layout.pot_item,
+                pots.getPotDescriptions());
 
         //Configure the list view.
-        //todo: ListView list = (ListView) findViewById(R.id.listViewMain);
-        //todo: list.setAdapter(potAdapter);
+        ListView list = (ListView) findViewById(R.id.potListView);
+        list.setAdapter(adapter);
+    }
+
+    private void registerClickCallback() {
+        ListView list = (ListView) findViewById(R.id.potListView);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView textView = (TextView) view;
+                String message = "You tapped on " + textView.getText() + ". Why would you do that?";
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     // Default boilerplate that might come handy later
