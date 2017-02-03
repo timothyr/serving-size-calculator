@@ -1,5 +1,6 @@
 package sfu.timr.servingsizecalculator;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,9 +9,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-// 👑
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,6 +31,19 @@ public class MainActivity extends AppCompatActivity {
                 addPot();
             }
         });
+
+        // Wiring the Add a pot button.
+        Button addPot = (Button) findViewById(R.id.addpot);
+        addPot.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Launch the Add Pot activity
+                Intent addPotMenu = new Intent(MainActivity.this, EnterPot.class);
+                startActivity(addPotMenu);
+            }
+        });
+
+        populateListView();
+
     }
 
     private void addPot() {
@@ -54,5 +73,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //todo: listview of pots
+    private void populateListView() {
+        // Create a dynamic list of pots
+        //todo:ArrayList<Pot>[] pots = new ArrayList<Pot>[];
+
+        // Build adapter
+        //todo: ArrayAdapter<Pot> potAdapter = new ArrayAdapter<Pot>(this, R.layout.potcollection, pots);
+
+        //Configure the list view.
+        //todo: ListView list = (ListView) findViewById(R.id.listViewMain);
+        //todo: list.setAdapter(potAdapter);
     }
 }
