@@ -18,15 +18,15 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="15dp"
-        android:id="@+id/potName" />
+        android:id="@+id/pot_name_title" />
 
     <TextView
         android:text="@string/pot_weight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="31dp"
-        android:id="@+id/potWeight"
-        android:layout_below="@+id/potName"
+        android:id="@+id/pot_weight_title"
+        android:layout_below="@+id/pot_name_title"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -35,14 +35,14 @@
         android:layout_height="wrap_content"
         android:inputType="textCapWords|textAutoCorrect|textAutoComplete"
         android:ems="10"
-        android:id="@+id/enterPotName"
+        android:id="@+id/pot_name_entry"
         android:layout_alignParentTop="true"
-        android:layout_alignLeft="@+id/enterPotWeight"
-        android:layout_alignStart="@+id/enterPotWeight"
+        android:layout_alignLeft="@+id/pot_weight_entry"
+        android:layout_alignStart="@+id/pot_weight_entry"
         android:hint="@string/pot_name"
         android:capitalize="words"
         android:textIsSelectable="true"
-        android:nextFocusDown="@id/enterPotWeight"
+        android:nextFocusDown="@id/pot_weight_entry"
         android:singleLine="true"
         android:selectAllOnFocus="true" />
 
@@ -51,9 +51,9 @@
         android:layout_height="wrap_content"
         android:inputType="number"
         android:ems="10"
-        android:id="@+id/enterPotWeight"
-        android:layout_alignBaseline="@+id/potWeight"
-        android:layout_alignBottom="@+id/potWeight"
+        android:id="@+id/pot_weight_entry"
+        android:layout_alignBaseline="@+id/pot_weight_title"
+        android:layout_alignBottom="@+id/pot_weight_title"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="18dp"
@@ -64,9 +64,9 @@
         android:text="add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/enterPotWeight"
-        android:layout_alignRight="@+id/enterPotWeight"
-        android:layout_alignEnd="@+id/enterPotWeight"
+        android:layout_below="@+id/pot_weight_entry"
+        android:layout_alignRight="@+id/pot_weight_entry"
+        android:layout_alignEnd="@+id/pot_weight_entry"
         android:layout_marginTop="11dp"
         android:id="@+id/enter_pot_add_button"
         style="@style/Widget.AppCompat.Button.Colored" />
