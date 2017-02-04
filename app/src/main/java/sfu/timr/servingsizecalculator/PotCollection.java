@@ -1,5 +1,14 @@
 package sfu.timr.servingsizecalculator;
 
+import android.content.Context;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +17,6 @@ import java.util.List;
  */
 public class PotCollection {
     private List<Pot> pots = new ArrayList<>();
-
 
     public void addPot(Pot pot) {
         pots.add(pot);
@@ -43,5 +51,36 @@ public class PotCollection {
             throw new IllegalArgumentException();
         }
 
+    }
+
+    public ArrayAdapter<Pot> getArrayAdapter(Context context) {
+        PotListAdapter adapter = new PotListAdapter(context);
+        return adapter;
+    }
+
+    private class PotListAdapter extends ArrayAdapter<Pot> {
+
+        // Must pass in context e.g. MainActivity.this
+        PotListAdapter(Context context) {
+            super(context, R.layout.pot_item, pots);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent){
+            // Ensure we have a view (could have been passed a null)
+            View itemView = convertView;
+            if(itemView == null) {
+                itemView = LayoutInflater.from(getContext()).inflate(R.layout.pot_item, parent, false);
+            }
+
+            // Get the current pot
+            Pot currentPot = pots.get(position);
+
+            // Fill the TextView
+            TextView description = (TextView) itemView.findViewById(R.id.item_description);
+            description.setText(currentPot.getName() + " - " + currentPot.getWeightInG() + "g");
+
+            return itemView;
+        }
     }
 }
