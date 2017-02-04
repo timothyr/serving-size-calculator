@@ -1,5 +1,6 @@
 package sfu.timr.servingsizecalculator;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final int REQUEST_CODE_ADDPOT = 1000;
     // Pot collection array
     private PotCollection pots = new PotCollection();
 
@@ -24,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        setupFloatingAddPotButton(R.id.floatingAddPotButton);
+        setupFloatingAddPotButton();
 
         populatePotCollection();
 
@@ -32,15 +34,15 @@ public class MainActivity extends AppCompatActivity {
         registerClickCallback();
     }
 
-    private void setupFloatingAddPotButton(int buttonId) {
-        FloatingActionButton fab = (FloatingActionButton) findViewById(buttonId);
+    private void setupFloatingAddPotButton() {
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.floatingAddPotButton);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Launch the Add Pot activity
-                Intent addPotMenu = new Intent(MainActivity.this, EnterPotActivity.class);
-                startActivity(addPotMenu);
+                Intent addPotIntent = EnterPotActivity.makeIntent(MainActivity.this);
+                startActivityForResult(addPotIntent, REQUEST_CODE_ADDPOT);
             }
         });
     }
@@ -71,6 +73,25 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+            case REQUEST_CODE_ADDPOT:
+                if(resultCode == Activity.RESULT_OK) {
+                    // Get the pot data
+                    String potName = data.getStringExtra("POTNAME");
+                    Integer potWeight = data.getIntExtra("POTWEIGHT", 0);
+
+                    // Create a pot based on data
+                    Pot pot = new Pot(potName, potWeight);
+
+                    // Add pot to PotCollection
+                    pots.addPot(pot);
+                    populateListView();
+                }
+        }
     }
 
     // Default boilerplate that might come handy later
