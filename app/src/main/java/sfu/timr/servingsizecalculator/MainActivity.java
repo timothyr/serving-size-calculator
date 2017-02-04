@@ -12,10 +12,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-// Pot collection array
-
-
 public class MainActivity extends AppCompatActivity {
+
+    // Pot collection array
+    private PotCollection pots = new PotCollection();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         setupFloatingAddPotButton(R.id.floatingAddPotButton);
+
+        populatePotCollection();
 
         populateListView();
         registerClickCallback();
@@ -42,20 +45,16 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void populateListView() {
-        // Create a dynamic list of pots
-        PotCollection pots = new PotCollection();
-
+    private void populatePotCollection() {
         for(int i = 0; i < 3; i++){
-            Pot pot = new Pot("garbage", i);
+            Pot pot = new Pot("garbage", (i+1) * 1000);
             pots.addPot(pot);
         }
+    }
 
-        // Build adapter
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this,
-                R.layout.pot_item,
-                pots.getPotDescriptions());
+    private void populateListView() {
+        // Get adapter from PotCollection
+        ArrayAdapter<Pot> adapter = pots.getArrayAdapter(MainActivity.this);
 
         //Configure the list view.
         ListView list = (ListView) findViewById(R.id.potListView);
