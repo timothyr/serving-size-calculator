@@ -10,6 +10,7 @@ public class Pot {
     private int weightInG;
     // Set member data based on parameters.
     public Pot(String name, int weightInG) {
+        super();
         this.name = name;
         this.weightInG = weightInG;
     }
