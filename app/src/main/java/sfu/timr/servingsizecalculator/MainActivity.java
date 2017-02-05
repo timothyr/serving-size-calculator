@@ -4,9 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,8 +20,10 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE_ADDPOT = 1000;
+    private android.view.ActionMode actionMode;
     // Pot collection array
     private PotCollection pots = new PotCollection();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,12 +31,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        //toolbar.showContextMenu();
-        toolbar.showOverflowMenu();
-
-        //ActionBar actionBar = getSupportActionBar();
-        //actionBar.show();
 
         setupFloatingAddPotButton();
 
@@ -80,8 +77,26 @@ public class MainActivity extends AppCompatActivity {
                 TextView textView = (TextView) view;
                 String message = "You tapped on " + textView.getText() + ". Why would you do that?";
                 Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+                view.setSelected(false);
             }
         });
+
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                TextView textView = (TextView) view;
+                String message = "LONG PRESS ON " + textView.getText() + "!";
+                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
+
+                view.setSelected(true);
+
+                showActionBar();
+
+                return true;
+            }
+        });
+
+
     }
 
     @Override
@@ -103,9 +118,34 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    // Default boilerplate that might come handy later
-    // -----------------------------
+    private class ActionModeCallback implements android.view.ActionMode.Callback {
 
+        @Override
+        public boolean onCreateActionMode(android.view.ActionMode actionMode, Menu menu) {
+            // Inflate action menu over top of default actionbar
+            actionMode.getMenuInflater().inflate(R.menu.action_menu, menu);
+            return true;
+        }
+
+        @Override
+        public boolean onPrepareActionMode(android.view.ActionMode actionMode, Menu menu) {
+            return false;
+        }
+
+        @Override
+        public boolean onActionItemClicked(android.view.ActionMode actionMode, MenuItem menuItem) {
+            return false;
+        }
+
+        @Override
+        public void onDestroyActionMode(android.view.ActionMode actionMode) {
+
+        }
+    }
+
+    private void showActionBar() {
+        actionMode = startActionMode(new ActionModeCallback());
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

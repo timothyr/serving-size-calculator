@@ -3,17 +3,5 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="sfu.timr.servingsizecalculator.MainActivity">
 
-    <item
-        android:id="@+id/action_edit"
-        android:orderInCategory="1"
-        android:icon="@android:drawable/ic_menu_edit"
-        android:title="@string/edit_pot"
-        app:showAsAction="ifRoom"/>
 
-    <item
-        android:id="@+id/action_delete"
-        android:orderInCategory="2"
-        android:icon="@android:drawable/ic_menu_delete"
-        android:title="@string/delete_pot"
-        app:showAsAction="ifRoom"/>
 </menu>
