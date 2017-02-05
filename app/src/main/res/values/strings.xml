@@ -6,4 +6,6 @@
     <string name="pot_name">Pot Name</string>
     <string name="pot_weight">Pot Weight (g)</string>
     <string name="enter_pot_title">New pot entry</string>
+    <string name="edit_pot">Edit Pot</string>
+    <string name="delete_pot">Delete Pot</string>
 </resources>
