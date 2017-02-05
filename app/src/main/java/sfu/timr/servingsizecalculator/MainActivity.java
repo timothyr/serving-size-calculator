@@ -15,7 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+// testing merge
 public class MainActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE_ADDPOT = 1000;
