@@ -19,7 +19,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/potListView"
-        android:choiceMode="singleChoice"
         android:listSelector="#EEEEEE"
         android:layout_marginTop="?attr/actionBarSize" />
 

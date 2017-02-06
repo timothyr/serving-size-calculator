@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.ActionMode;
 import android.support.v7.widget.Toolbar;
 
 import android.view.Menu;
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         //populatePotCollection();
 
-        populateListView();
+        clearChoicesAndUpdateListView();
         registerClickCallback();
     }
 
@@ -61,12 +60,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void populateListView() {
-        // Get adapter from PotCollection
+    private void clearChoicesAndUpdateListView() {
+        //TODO destroy action bar
         ArrayAdapter<Pot> adapter = pots.getArrayAdapter(MainActivity.this);
-
-        //Configure the list view.
         ListView list = (ListView) findViewById(R.id.potListView);
+        list.clearChoices();
         list.setAdapter(adapter);
     }
 
@@ -75,10 +73,7 @@ public class MainActivity extends AppCompatActivity {
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView textView = (TextView) view;
-                String message = "You tapped on " + textView.getText() + ". Why would you do that?";
-                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
-                view.setSelected(false);
+                clearChoicesAndUpdateListView();
 
                 // Code to launch the calculator activity from clicking.
                 // todo: refactor to function later, or clean this one up.
@@ -91,11 +86,8 @@ public class MainActivity extends AppCompatActivity {
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
-                TextView textView = (TextView) view;
-                String message = "LONG PRESS ON " + textView.getText() + "!";
-                Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
 
-                view.setSelected(true);
+                //view.setSelected(true);
 
                 showActionBar();
 
@@ -118,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // Add pot to PotCollection
                     pots.addPot(pot);
-                    populateListView();
+                    clearChoicesAndUpdateListView();
                 }
         }
     }

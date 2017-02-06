@@ -19,7 +19,7 @@ public class PotCollection {
     private List<Pot> pots = new ArrayList<>();
 
     public void addPot(Pot pot) {
-        pots.add(pot);
+        pots.add(0, pot);
     }
 
     public void changePot(Pot pot, int indexOfPotEditing) {
