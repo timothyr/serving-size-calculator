@@ -25,6 +25,7 @@ public class CalculateServingActivity extends AppCompatActivity {
         extractDataFromIntent();
         setupBackButton();
         setupDefaultText();
+        setupServingSize(potWeight,2);
     }
 
     private void extractDataFromIntent() {
@@ -55,8 +56,22 @@ public class CalculateServingActivity extends AppCompatActivity {
         TextView getPotName = (TextView) findViewById(R.id.textPotName);
         getPotName.setText(potName);
 
-        //TextView getPotWeight = (TextView) findViewById(R.id.textPotWeight);
-        //getPotName.setText(potWeight);
+        TextView getPotWeight = (TextView) findViewById(R.id.textPotWeight);
+        getPotWeight.setText(Integer.toString(potWeight));
+    }
+
+    private void setupServingSize(int potSize, int servingSize) {
+        if (servingSize == 0) {
+            return;
+        }
+
+        TextView getServingSize = (TextView) findViewById(R.id.textServingWeight);
+        getServingSize.setText(Integer.toString(potSize/servingSize));
+    }
+
+    private void setupFoodWeight(int foodSize, int potWeight) {
+        TextView weightOfFood = (TextView) findViewById(R.id.textWeightOfFood);
+        weightOfFood.setText(Integer.toString(foodSize - potWeight));
     }
 }
 
