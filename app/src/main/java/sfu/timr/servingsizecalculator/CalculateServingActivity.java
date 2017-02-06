@@ -5,8 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class CalculateServingActivity extends AppCompatActivity {
@@ -25,7 +28,8 @@ public class CalculateServingActivity extends AppCompatActivity {
         extractDataFromIntent();
         setupBackButton();
         setupDefaultText();
-        setupServingSize(potWeight,2);
+        setupServingSize(2); //temporaily 22
+        setupFoodWeight();
     }
 
     private void extractDataFromIntent() {
@@ -60,18 +64,37 @@ public class CalculateServingActivity extends AppCompatActivity {
         getPotWeight.setText(Integer.toString(potWeight));
     }
 
-    private void setupServingSize(int potSize, int servingSize) {
+    private void setupServingSize(int servingSize) {
         if (servingSize == 0) {
             return;
         }
 
         TextView getServingSize = (TextView) findViewById(R.id.textServingWeight);
-        getServingSize.setText(Integer.toString(potSize/servingSize));
+        getServingSize.setText(Integer.toString(servingSize));
     }
 
-    private void setupFoodWeight(int foodSize, int potWeight) {
-        TextView weightOfFood = (TextView) findViewById(R.id.textWeightOfFood);
-        weightOfFood.setText(Integer.toString(foodSize - potWeight));
+    private void setupFoodWeight() {
+        TextWatcher textWatcher = new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //todo: not working?
+                EditText servingWeight = (EditText) findViewById(R.id.textWeightWithFood);
+                int foodSize = Integer.parseInt(servingWeight.getText().toString().trim());
+                TextView weightOfFood = (TextView) findViewById(R.id.textWeightOfFood);
+                weightOfFood.setText(Integer.toString(foodSize));
+            }
+        };
+
     }
 }
 
