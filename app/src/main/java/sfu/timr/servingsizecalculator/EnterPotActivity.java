@@ -34,12 +34,20 @@ public class EnterPotActivity extends AppCompatActivity {
                 EditText potWeightEditText = (EditText) findViewById(R.id.pot_weight_entry);
                 String potWeightText = potWeightEditText.getText().toString().trim();
 
+                try {
+                    if (potNameEditText.getText().length() == 0) {
+                        throw new NullPointerException("Invalid Pot Name Size");
+                    }
+                } catch (NullPointerException e) {
+                    Toast.makeText(EnterPotActivity.this, "Pot Name must be at least 1 character", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 int potWeight;
                 try {
                     potWeight = Integer.parseInt(potWeightText);
                 } catch (NumberFormatException e) {
                     // TODO message on EditText showing error
-                    // TODO ^^^ does not factor in a nullptr case
                     Toast.makeText(EnterPotActivity.this, "Fill out the form correctly", Toast.LENGTH_SHORT).show();
                     return;
                 }
