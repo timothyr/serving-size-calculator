@@ -25,14 +25,71 @@ public class CalculateServingActivity extends AppCompatActivity implements TextW
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculate_pot);
 
-        EditText servingWeight = (EditText) findViewById(R.id.textWeightWithFood);
-        servingWeight.addTextChangedListener(this);
-
+        setTextChangedListeners();
         extractDataFromIntent();
         setupBackButton();
         setupDefaultText();
         setupServingSize(2); //temporaily 22
         setupFoodWeight();
+    }
+
+    private void calculateServings() {
+        // The TextViews to be set
+        TextView weightOfFood = (TextView) findViewById(R.id.textWeightOfFood);
+        TextView finalServingWeight = (TextView) findViewById(R.id.textServingWeight);
+
+        // Get pot and food weight combined
+        EditText servingWeight = (EditText) findViewById(R.id.textWeightWithFood);
+        String servingWeightString = servingWeight.getText().toString().trim();
+        int totalPotWeight;
+        try {
+            totalPotWeight = Integer.parseInt(servingWeightString);
+        } catch (NumberFormatException e) {
+            weightOfFood.setText("" + 0);
+            finalServingWeight.setText("" + 0);
+            return;
+        }
+
+        int foodWeight = totalPotWeight - potWeight;
+
+        // Check for negative number
+        if(foodWeight <= 0) {
+            weightOfFood.setText("" + 0);
+            finalServingWeight.setText("" + 0);
+            return;
+        }
+
+        // Set weight text
+        weightOfFood.setText("" + foodWeight);
+
+        // Get number of servings
+        EditText numberServingsEditText = (EditText) findViewById(R.id.textNumberServings);
+        String numberServingsString = numberServingsEditText.getText().toString().trim();
+        int numberServings;
+        try {
+            numberServings = Integer.parseInt(numberServingsString);
+        } catch (NumberFormatException e) {
+            finalServingWeight.setText("" + 0);
+            return;
+        }
+
+        // Check for negative number (this shouldnt be possible but we check anyway)
+        if(numberServings <= 0) {
+            finalServingWeight.setText("" + 0);
+        }
+
+        int calculatedServingWeight = foodWeight * numberServings;
+
+        // Set serving weight text
+        finalServingWeight.setText("" + calculatedServingWeight);
+    }
+
+    private void setTextChangedListeners() {
+        EditText servingWeight = (EditText) findViewById(R.id.textWeightWithFood);
+        servingWeight.addTextChangedListener(this);
+
+        EditText servingNumber = (EditText) findViewById(R.id.textNumberServings);
+        servingNumber.addTextChangedListener(this);
     }
 
     private void extractDataFromIntent() {
@@ -92,10 +149,7 @@ public class CalculateServingActivity extends AppCompatActivity implements TextW
 
     @Override
     public void afterTextChanged(Editable editable) {
-        EditText servingWeight = (EditText) findViewById(R.id.textWeightWithFood);
-        int foodSize = Integer.parseInt(servingWeight.getText().toString().trim());
-        TextView weightOfFood = (TextView) findViewById(R.id.textWeightOfFood);
-        weightOfFood.setText("" + foodSize);
+        calculateServings();
     }
 }
 
