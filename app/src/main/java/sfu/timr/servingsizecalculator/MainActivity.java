@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     public static final int REQUEST_CODE_ADDPOT = 1000;
     public static final int REQUEST_CODE_SERVING = 2000;
     private android.view.ActionMode actionMode;
+    private Pot selectedPot;
     // Pot collection array
     private PotCollection pots = new PotCollection();
 
@@ -70,9 +71,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void registerClickCallback() {
         ListView list = (ListView) findViewById(R.id.potListView);
+
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if(actionMode != null) {
+                    actionMode.finish();
+                    selectedPot = null;
+                    clearChoicesAndUpdateListView();
+                    return;
+                }
                 clearChoicesAndUpdateListView();
 
                 // Code to launch the calculator activity from clicking.
@@ -86,9 +94,17 @@ public class MainActivity extends AppCompatActivity {
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                selectedPot = pots.getPot(i);
+                // prevent overwrite of actionmode selection
+                if(actionMode != null) {
+                    actionMode.setTitle(selectedPot.getName());
+                    return false;
+                }
 
-                //view.setSelected(true);
 
+
+
+                view.setSelected(true);
                 showActionBar();
 
                 return true;
@@ -120,7 +136,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onCreateActionMode(android.view.ActionMode actionMode, Menu menu) {
             // Inflate action menu over top of default actionbar
+            actionMode.setTitle(selectedPot.getName());
             actionMode.getMenuInflater().inflate(R.menu.action_menu, menu);
+
             return true;
         }
 
@@ -135,8 +153,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onDestroyActionMode(android.view.ActionMode actionMode) {
-
+        public void onDestroyActionMode(android.view.ActionMode mode) {
+            selectedPot = null;
+            actionMode = null;
         }
     }
 
