@@ -19,55 +19,107 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <Button
-        android:text="@string/back"
+    <TextView
+        android:text="@string/weight_empty"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/calculate_pot_back_button"
-        android:layout_marginTop="39dp"
-        android:layout_below="@+id/servingWeight"
+        android:id="@+id/weightEmpty"
+        android:layout_below="@+id/pot"
+        android:layout_alignLeft="@+id/numberServings"
+        android:layout_alignStart="@+id/numberServings"
+        android:layout_marginTop="13dp" />
+
+    <TextView
+        android:text="@string/weight_with_food"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/weightWithFood"
+        android:layout_below="@+id/weightEmpty"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="36dp" />
+
+    <TextView
+        android:text="@string/weight_of_food_g"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/weightOfFood"
+        android:layout_below="@+id/textWeightWithFood"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp" />
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/textWeightWithFood"
+        android:hint="@string/enter_food_weight"
+        android:layout_alignBaseline="@+id/weightWithFood"
+        android:layout_alignBottom="@+id/weightWithFood"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:layout_width="175dp" />
+
+    <EditText
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/textNumberServings"
+        android:hint="@string/of_servings"
+        android:layout_alignBaseline="@+id/numberServings"
+        android:layout_alignBottom="@+id/numberServings"
+        android:layout_alignLeft="@+id/textWeightWithFood"
+        android:layout_alignStart="@+id/textWeightWithFood"
+        android:layout_width="175dp" />
 
     <TextView
         android:text="@string/number_of_servings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/numberServings"
-        android:layout_marginTop="41dp"
-        android:layout_below="@+id/weightWithFood"
+        android:layout_marginTop="34dp"
+        android:layout_below="@+id/weightOfFood"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <Button
+        android:text="@string/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/calculate_pot_back_button"
+        android:layout_below="@+id/textNumberServings"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="101dp" />
 
     <TextView
         android:text="@string/serving_weight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/servingWeight"
-        android:layout_marginTop="38dp"
-        android:layout_below="@+id/numberServings"
+        android:layout_alignBottom="@+id/textServingWeight"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:text="@string/weight_empty"
+        android:text="@string/testfoodweight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/weightEmpty"
-        android:layout_marginTop="28dp"
-        android:layout_below="@+id/pot"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:id="@+id/textWeightOfFood"
+        android:layout_alignBaseline="@+id/weightOfFood"
+        android:layout_alignBottom="@+id/weightOfFood"
+        android:layout_alignLeft="@+id/textWeightWithFood"
+        android:layout_alignStart="@+id/textWeightWithFood" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textPotWeight"
         android:text="@string/testweight"
-        android:layout_alignBaseline="@+id/weightEmpty"
-        android:layout_alignBottom="@+id/weightEmpty"
-        android:layout_alignLeft="@+id/textPotName"
-        android:layout_alignStart="@+id/textPotName" />
+        android:layout_above="@+id/weightWithFood"
+        android:layout_alignLeft="@+id/textWeightWithFood"
+        android:layout_alignStart="@+id/textWeightWithFood" />
 
     <TextView
         android:text="@string/testname"
@@ -75,29 +127,17 @@
         android:layout_height="wrap_content"
         android:id="@+id/textPotName"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/calculate_pot_back_button"
-        android:layout_toStartOf="@+id/calculate_pot_back_button" />
+        android:layout_alignLeft="@+id/textPotWeight"
+        android:layout_alignStart="@+id/textPotWeight" />
 
     <TextView
-        android:text="@string/weight_with_food"
+        android:text="@string/testservingweight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/weightWithFood"
-        android:layout_marginTop="32dp"
-        android:layout_below="@+id/weightEmpty"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/potWithFood"
-        android:layout_width="150dp"
-        android:layout_alignBaseline="@+id/weightWithFood"
-        android:layout_alignBottom="@+id/weightWithFood"
-        android:layout_alignLeft="@+id/textPotWeight"
-        android:layout_alignStart="@+id/textPotWeight"
-        android:hint="@string/food_weight_g" />
+        android:id="@+id/textServingWeight"
+        android:layout_marginTop="33dp"
+        android:layout_below="@+id/textNumberServings"
+        android:layout_alignLeft="@+id/textNumberServings"
+        android:layout_alignStart="@+id/textNumberServings" />
 
 </RelativeLayout>

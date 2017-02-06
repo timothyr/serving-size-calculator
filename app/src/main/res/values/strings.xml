@@ -20,6 +20,11 @@
     <string name="testweight">testWeight</string>
     <string name="testname">testName</string>
     <string name="food_weight_g">Food Weight (g)</string>
+    <string name="weight_of_food_g">Weight of food (g)</string>
+    <string name="testservingweight">testServingWeight</string>
+    <string name="of_servings"># of Servings</string>
+    <string name="testfoodweight">testFoodWeight</string>
+    <string name="enter_food_weight">Enter Food Weight</string>
 
 
 </resources>
