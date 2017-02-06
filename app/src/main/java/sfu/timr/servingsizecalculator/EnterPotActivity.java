@@ -18,12 +18,13 @@ public class EnterPotActivity extends AppCompatActivity {
         setContentView(R.layout.activity_enter_pot);
 
         setupAddPotButton();
+        setupCancelPotButton();
     }
 
     private void setupAddPotButton() {
-        Button button = (Button) findViewById(R.id.enter_pot_add_button);
+        Button addButton = (Button) findViewById(R.id.enter_pot_add_button);
 
-        button.setOnClickListener(new View.OnClickListener() {
+        addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // Extract data from the UI
@@ -47,6 +48,17 @@ public class EnterPotActivity extends AppCompatActivity {
                 intent.putExtra("POTNAME", potName);
                 intent.putExtra("POTWEIGHT", potWeight);
                 setResult(Activity.RESULT_OK, intent);
+                finish();
+            }
+        });
+    }
+
+    private void setupCancelPotButton() {
+        Button cancelButton = (Button) findViewById(R.id.enter_pot_cancel_button);
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 finish();
             }
         });

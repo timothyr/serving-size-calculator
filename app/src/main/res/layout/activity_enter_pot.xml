@@ -61,14 +61,27 @@
         android:hint="@string/pot_weight" />
 
     <Button
-        android:text="add"
+        android:text="@string/add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:id="@+id/enter_pot_add_button"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_below="@+id/pot_weight_entry"
+        android:layout_alignLeft="@+id/pot_weight_entry"
+        android:layout_alignStart="@+id/pot_weight_entry"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp" />
+
+    <Button
+        android:text="@android:string/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/enter_pot_cancel_button"
+        android:layout_alignBaseline="@+id/enter_pot_add_button"
+        android:layout_alignBottom="@+id/enter_pot_add_button"
         android:layout_alignRight="@+id/pot_weight_entry"
         android:layout_alignEnd="@+id/pot_weight_entry"
-        android:layout_marginTop="11dp"
-        android:id="@+id/enter_pot_add_button"
         style="@style/Widget.AppCompat.Button.Colored" />
 
 
