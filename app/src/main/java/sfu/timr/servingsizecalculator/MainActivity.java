@@ -101,9 +101,6 @@ public class MainActivity extends AppCompatActivity {
                     return false;
                 }
 
-
-
-
                 view.setSelected(true);
                 showActionBar();
 
