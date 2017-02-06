@@ -5,8 +5,18 @@
     <string name="title_activity_calculate_pot">CalculatePot</string>
     <string name="pot_name">Pot Name</string>
     <string name="pot_weight">Pot Weight (g)</string>
-    <string name="enter_pot_title">New pot entry</string>
+    <string name="enter_pot_title">New Pot Entry</string>
     <string name="edit_pot">Edit Pot</string>
     <string name="delete_pot">Delete Pot</string>
     <string name="add">Add</string>
+    <string name="cancel">Cancel</string>
+    <string name="back">Back</string>
+    <string name="pot">Pot</string>
+    <string name="weight_empty">Weight empty (g)</string>
+    <string name="weight_with_food">Weight with food (g)</string>
+    <string name="weight_of_food">Weight of food (g)</string>
+    <string name="number_of_servings"># Servings</string>
+    <string name="serving_weight">Serving Weight</string>
+
+
 </resources>
