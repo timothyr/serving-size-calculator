@@ -17,6 +17,9 @@
     <string name="weight_of_food">Weight of food (g)</string>
     <string name="number_of_servings"># Servings</string>
     <string name="serving_weight">Serving Weight</string>
+    <string name="testweight">testWeight</string>
+    <string name="testname">testName</string>
+    <string name="food_weight_g">Food Weight (g)</string>
 
 
 </resources>

@@ -1,11 +1,20 @@
 package sfu.timr.servingsizecalculator;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class CalculateServingActivity extends AppCompatActivity {
+
+    private static final String POT_NAME = "Pot Name";
+    private static final String POT_WEIGHT = "Pot Weight";
+    private String potName;
+    private int potWeight;
 
     // For use with calculating the serving size in a pot.
     @Override
@@ -13,7 +22,15 @@ public class CalculateServingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calculate_pot);
 
+        extractDataFromIntent();
         setupBackButton();
+        setupDefaultText();
+    }
+
+    private void extractDataFromIntent() {
+        Intent intent = getIntent();
+        potName = intent.getStringExtra(POT_NAME);
+        potWeight = intent.getIntExtra(POT_WEIGHT, 0);
     }
 
     private void setupBackButton() {
@@ -25,6 +42,21 @@ public class CalculateServingActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    public static Intent makeIntent(Context context, Pot returnPot) {
+        Intent intent = new Intent(context, CalculateServingActivity.class);
+        intent.putExtra(POT_NAME, returnPot.getName());
+        intent.putExtra(POT_WEIGHT, returnPot.getWeightInG());
+        return intent;
+    }
+
+    private void setupDefaultText() {
+        TextView getPotName = (TextView) findViewById(R.id.textPotName);
+        getPotName.setText(potName);
+
+        //TextView getPotWeight = (TextView) findViewById(R.id.textPotWeight);
+        //getPotName.setText(potWeight);
     }
 }
 

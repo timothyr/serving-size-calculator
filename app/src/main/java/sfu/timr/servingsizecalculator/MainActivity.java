@@ -20,6 +20,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity {
 
     public static final int REQUEST_CODE_ADDPOT = 1000;
+    public static final int REQUEST_CODE_SERVING = 2000;
     private android.view.ActionMode actionMode;
     // Pot collection array
     private PotCollection pots = new PotCollection();
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
         setupFloatingAddPotButton();
 
-        populatePotCollection();
+        //populatePotCollection();
 
         populateListView();
         registerClickCallback();
@@ -78,6 +79,12 @@ public class MainActivity extends AppCompatActivity {
                 String message = "You tapped on " + textView.getText() + ". Why would you do that?";
                 Toast.makeText(MainActivity.this, message, Toast.LENGTH_SHORT).show();
                 view.setSelected(false);
+
+                // Code to launch the calculator activity from clicking.
+                // todo: refactor to function later, or clean this one up.
+                Intent calculateServingIntent = CalculateServingActivity.makeIntent(MainActivity.this,
+                        pots.getPot(i));
+                startActivityForResult(calculateServingIntent, REQUEST_CODE_SERVING);
             }
         });
 
@@ -95,8 +102,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-
     }
 
     @Override

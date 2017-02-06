@@ -39,6 +39,7 @@ public class EnterPotActivity extends AppCompatActivity {
                     potWeight = Integer.parseInt(potWeightText);
                 } catch (NumberFormatException e) {
                     // TODO message on EditText showing error
+                    // TODO ^^^ does not factor in a nullptr case
                     Toast.makeText(EnterPotActivity.this, "Fill out the form correctly", Toast.LENGTH_SHORT).show();
                     return;
                 }
