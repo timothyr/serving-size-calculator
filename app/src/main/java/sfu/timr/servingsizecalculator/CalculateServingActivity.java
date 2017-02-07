@@ -14,8 +14,6 @@ import android.widget.TextView;
 
 public class CalculateServingActivity extends AppCompatActivity implements TextWatcher {
 
-    private static final String POT_NAME = "Pot Name";
-    private static final String POT_WEIGHT = "Pot Weight";
     private String potName;
     private int potWeight;
 
@@ -29,8 +27,6 @@ public class CalculateServingActivity extends AppCompatActivity implements TextW
         extractDataFromIntent();
         setupBackButton();
         setupDefaultText();
-        setupServingSize(2); //temporaily 22
-        setupFoodWeight();
     }
 
     private void calculateServings() {
@@ -94,8 +90,8 @@ public class CalculateServingActivity extends AppCompatActivity implements TextW
 
     private void extractDataFromIntent() {
         Intent intent = getIntent();
-        potName = intent.getStringExtra(POT_NAME);
-        potWeight = intent.getIntExtra(POT_WEIGHT, 0);
+        potName = intent.getStringExtra(getString(R.string.pot_name));
+        potWeight = intent.getIntExtra(getString(R.string.pot_weight), 0);
     }
 
     private void setupBackButton() {
@@ -109,10 +105,10 @@ public class CalculateServingActivity extends AppCompatActivity implements TextW
         });
     }
 
-    public static Intent makeIntent(Context context, Pot returnPot) {
+    public static Intent makeIntent(Context context, Pot returnPot, String returnPotNameString, String returnPotWeightString) {
         Intent intent = new Intent(context, CalculateServingActivity.class);
-        intent.putExtra(POT_NAME, returnPot.getName());
-        intent.putExtra(POT_WEIGHT, returnPot.getWeightInG());
+        intent.putExtra(returnPotNameString, returnPot.getName());
+        intent.putExtra(returnPotWeightString, returnPot.getWeightInG());
         return intent;
     }
 
@@ -122,19 +118,6 @@ public class CalculateServingActivity extends AppCompatActivity implements TextW
 
         TextView getPotWeight = (TextView) findViewById(R.id.textPotWeight);
         getPotWeight.setText("" + potWeight);
-    }
-
-    private void setupServingSize(int servingSize) {
-        if (servingSize == 0) {
-            return;
-        }
-
-        TextView getServingSize = (TextView) findViewById(R.id.textServingWeight);
-        getServingSize.setText("" + servingSize);
-    }
-
-    private void setupFoodWeight() {
-
     }
 
     @Override

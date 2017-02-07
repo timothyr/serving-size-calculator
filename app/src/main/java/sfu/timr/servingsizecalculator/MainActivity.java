@@ -84,7 +84,9 @@ public class MainActivity extends AppCompatActivity {
                 // Launch CalculateServingActivity
                 Intent calculateServingIntent = CalculateServingActivity.makeIntent(
                         MainActivity.this,
-                        pots.getPot(i));
+                        pots.getPot(i),
+                        getString(R.string.pot_name),
+                        getString(R.string.pot_weight));
                 startActivityForResult(calculateServingIntent, REQUEST_CODE_SERVING);
             }
         });
@@ -112,8 +114,8 @@ public class MainActivity extends AppCompatActivity {
             case REQUEST_CODE_ADDPOT:
                 if(resultCode == Activity.RESULT_OK) {
                     // Get the pot data
-                    String potName = data.getStringExtra("POTNAME");
-                    Integer potWeight = data.getIntExtra("POTWEIGHT", 0);
+                    String potName = data.getStringExtra(getString(R.string.pot_name));
+                    Integer potWeight = data.getIntExtra(getString(R.string.pot_weight), 0);
 
                     // Create a pot based on data
                     Pot pot = new Pot(potName, potWeight);
@@ -129,8 +131,8 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     }
                     // Get the pot data
-                    String potName = data.getStringExtra("POTNAME");
-                    Integer potWeight = data.getIntExtra("POTWEIGHT", 0);
+                    String potName = data.getStringExtra(getString(R.string.pot_name));
+                    Integer potWeight = data.getIntExtra(getString(R.string.pot_weight), 0);
 
                     // Create a pot based on data
                     Pot pot = new Pot(potName, potWeight);
@@ -146,7 +148,9 @@ public class MainActivity extends AppCompatActivity {
     private void editSelectedPot() {
         Intent EditPotIntent = EnterPotActivity.makeIntent(
                 MainActivity.this,
-                selectedPot);
+                selectedPot,
+                getString(R.string.pot_name),
+                getString(R.string.pot_weight));
         startActivityForResult(EditPotIntent, REQUEST_CODE_EDITPOT);
     }
 
@@ -217,8 +221,8 @@ public class MainActivity extends AppCompatActivity {
         editor.clear();
 
         int i = 0;
-        while (prefs.getInt("Pot Weight" + i, -1) != -1) {
-            Pot pot = new Pot(prefs.getString("Pot Name" + i, ""), prefs.getInt("Pot Weight" + i, 0));
+        while (prefs.getInt(getString(R.string.pot_weight) + i, -1) != -1) {
+            Pot pot = new Pot(prefs.getString(getString(R.string.pot_name) + i, ""), prefs.getInt(getString(R.string.pot_weight) + i, 0));
             pots.addPot(pot);
             i++;
         }
@@ -230,8 +234,8 @@ public class MainActivity extends AppCompatActivity {
         editor.clear();
         for (int i = 0; i < pots.getPots().size(); i++) {
             Pot pot = pots.getPot(i);
-            editor.putString("Pot Name" + i, pot.getName());
-            editor.putInt("Pot Weight" + i, pot.getWeightInG());
+            editor.putString(getString(R.string.pot_name) + i, pot.getName());
+            editor.putInt(getString(R.string.pot_weight) + i, pot.getWeightInG());
         }
         editor.commit();
     }

@@ -103,16 +103,6 @@
         android:layout_alignParentStart="true" />
 
     <TextView
-        android:text="@string/testfoodweight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/textWeightOfFood"
-        android:layout_alignBaseline="@+id/weightOfFood"
-        android:layout_alignBottom="@+id/weightOfFood"
-        android:layout_alignLeft="@+id/textWeightWithFood"
-        android:layout_alignStart="@+id/textWeightWithFood" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textPotWeight"
@@ -131,7 +121,17 @@
         android:layout_alignStart="@+id/textPotWeight" />
 
     <TextView
-        android:text="@string/testservingweight"
+        android:text="@string/default_value_of_0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textWeightOfFood"
+        android:layout_alignBaseline="@+id/weightOfFood"
+        android:layout_alignBottom="@+id/weightOfFood"
+        android:layout_alignLeft="@+id/textNumberServings"
+        android:layout_alignStart="@+id/textNumberServings" />
+
+    <TextView
+        android:text="@string/default_value_of_0"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/textServingWeight"

@@ -26,11 +26,11 @@ public class EnterPotActivity extends AppCompatActivity {
 
     private void extractDataFromIntent() {
         Intent intent = getIntent();
-        if(!intent.hasExtra("Pot Name")) {
+        if(!intent.hasExtra(getString(R.string.pot_name))) {
             setupAddPotButton();
         }
-        initialName = intent.getStringExtra("Pot Name");
-        initialPotWeight = intent.getIntExtra("Pot Weight", -1);
+        initialName = intent.getStringExtra(getString(R.string.pot_name));
+        initialPotWeight = intent.getIntExtra(getString(R.string.pot_weight), -1);
         setupAddPotButton(initialName, initialPotWeight);
     }
 
@@ -81,8 +81,8 @@ public class EnterPotActivity extends AppCompatActivity {
 
                 // Pass data back
                 Intent intent = new Intent();
-                intent.putExtra("POTNAME", potName);
-                intent.putExtra("POTWEIGHT", potWeight);
+                intent.putExtra(getString(R.string.pot_name), potName);
+                intent.putExtra(getString(R.string.pot_weight), potWeight);
                 setResult(Activity.RESULT_OK, intent);
                 finish();
             }
@@ -108,10 +108,10 @@ public class EnterPotActivity extends AppCompatActivity {
         return new Intent(context, EnterPotActivity.class);
     }
 
-    public static Intent makeIntent(Context context, Pot returnPot) {
+    public static Intent makeIntent(Context context, Pot returnPot, String returnPotNameString, String returnPotWeightString) {
         Intent intent = new Intent(context, EnterPotActivity.class);
-        intent.putExtra("Pot Name", returnPot.getName());
-        intent.putExtra("Pot Weight", returnPot.getWeightInG());
+        intent.putExtra(returnPotNameString, returnPot.getName());
+        intent.putExtra(returnPotWeightString, returnPot.getWeightInG());
         return intent;
     }
 
