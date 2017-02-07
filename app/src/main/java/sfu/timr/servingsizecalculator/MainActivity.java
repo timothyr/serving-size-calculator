@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
                 // prevent overwrite of actionmode selection
                 if(actionMode != null) {
                     actionMode.setTitle(selectedPot.getName());
-                    return false;
+                    return true;
                 }
 
                 view.setSelected(true);
@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        clearChoicesAndUpdateListView();
         switch (requestCode) {
             case REQUEST_CODE_ADDPOT:
                 if(resultCode == Activity.RESULT_OK) {
@@ -123,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // Add pot to PotCollection
                     pots.addPot(pot);
-                    clearChoicesAndUpdateListView();
+
                 }
         }
     }
@@ -146,11 +147,22 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public boolean onActionItemClicked(android.view.ActionMode actionMode, MenuItem menuItem) {
-            return false;
+            // Handle item selection
+            switch (menuItem.getItemId()) {
+                case R.id.action_edit:
+                    Toast.makeText(MainActivity.this, "EDIT " + selectedPot.getName(), Toast.LENGTH_SHORT).show();
+                    return true;
+                case R.id.action_delete:
+                    Toast.makeText(MainActivity.this, "DELETE " + selectedPot.getName(), Toast.LENGTH_SHORT).show();
+                    return true;
+                default:
+                    return false;
+            }
         }
 
         @Override
         public void onDestroyActionMode(android.view.ActionMode mode) {
+            clearChoicesAndUpdateListView();
             selectedPot = null;
             actionMode = null;
         }
@@ -180,6 +192,7 @@ public class MainActivity extends AppCompatActivity {
             return true;
         }
         */
+
 
         return super.onOptionsItemSelected(item);
     }
