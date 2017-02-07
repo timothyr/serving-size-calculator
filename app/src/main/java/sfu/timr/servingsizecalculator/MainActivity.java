@@ -167,7 +167,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         clearChoicesAndUpdateListView();
-        actionMode.finish();
+        if(actionMode != null) {
+            actionMode.finish();
+        }
     }
 
     private void editSelectedPot() {
