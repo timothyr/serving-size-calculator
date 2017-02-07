@@ -2,6 +2,7 @@ package sfu.timr.servingsizecalculator;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        loadSaveData();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         //populatePotCollection();
 
         clearChoicesAndUpdateListView();
+        writeSaveData();
         registerClickCallback();
     }
 
@@ -124,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
 
                     // Add pot to PotCollection
                     pots.addPot(pot);
+                    writeSaveData();
 
                 }
         }
@@ -193,8 +197,31 @@ public class MainActivity extends AppCompatActivity {
         }
         */
 
-
         return super.onOptionsItemSelected(item);
     }
 
+    private void loadSaveData() {
+        SharedPreferences prefs = getSharedPreferences("Pot Collection", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+
+        int i = 0;
+        while (prefs.getInt("Pot Weight" + i, 0) != 0) {
+            Pot pot = new Pot(prefs.getString("Pot Name" + i, ""), prefs.getInt("Pot Weight" + i, 0));
+            pots.addPot(pot);
+            i++;
+        }
+    }
+
+    private void writeSaveData() {
+        SharedPreferences prefs = getSharedPreferences("Pot Collection", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        for (int i = 0; i < pots.getPots().size(); i++) {
+            Pot pot = pots.getPot(i);
+            editor.putString("Pot Name" + i, pot.getName());
+            editor.putInt("Pot Weight" + i, pot.getWeightInG());
+        }
+        editor.commit();
+    }
 }
