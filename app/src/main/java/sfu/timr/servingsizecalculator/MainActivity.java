@@ -61,19 +61,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setupDeletePotButton() {
-        Button deleteButton = (Button) findViewById(R.id.action_delete);
-
-        deleteButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Delete the selected pot
-                Intent addPotIntent = EnterPotActivity.makeIntent(MainActivity.this);
-                startActivityForResult(addPotIntent, REQUEST_CODE_ADDPOT);
-            }
-        });
-    }
-
     private void populatePotCollection() {
         for(int i = 0; i < 3; i++){
             Pot pot = new Pot("garbage", (i+1) * 1000);
@@ -179,6 +166,15 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(EditPotIntent, REQUEST_CODE_EDITPOT);
     }
 
+    private void deleteSelectedPot() {
+        pots.removePot(selectedPot);
+        writeSaveData();
+        clearChoicesAndUpdateListView();
+        if(actionMode != null) {
+            actionMode.finish();
+        }
+    }
+
     private class ActionModeCallback implements android.view.ActionMode.Callback {
 
         @Override
@@ -203,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
                     editSelectedPot();
                     return true;
                 case R.id.action_delete:
-                    Toast.makeText(MainActivity.this, "DELETE " + selectedPot.getName(), Toast.LENGTH_SHORT).show();
+                    deleteSelectedPot();
                     return true;
                 default:
                     return false;

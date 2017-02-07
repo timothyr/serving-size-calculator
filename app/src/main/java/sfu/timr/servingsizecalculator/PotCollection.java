@@ -29,6 +29,10 @@ public class PotCollection {
         pots.add(indexOfPotEditing, pot);
     }
 
+    public boolean removePot(Pot pot) {
+        return pots.remove(pot);
+    }
+
     public int countPots() {
         return pots.size();
     }
