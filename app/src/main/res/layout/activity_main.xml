@@ -15,13 +15,6 @@
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_input_add" />
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/potListView"
-        android:listSelector="#DDDDDD"
-        android:layout_marginTop="?attr/actionBarSize" />
-
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -36,5 +29,20 @@
             app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     </android.support.design.widget.AppBarLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/potListView"
+        android:listSelector="#DDDDDD"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_weight="1" />
+
+    <TextView
+        android:text="@string/disclaimer1"
+        android:layout_width="358dp"
+        android:layout_height="43dp"
+        android:id="@+id/disclaimer1"
+        android:layout_gravity="bottom|end" />
 
 </android.support.design.widget.CoordinatorLayout>

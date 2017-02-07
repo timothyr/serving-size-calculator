@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         setupFloatingAddPotButton();
+        //setupDeletePotButton();
 
         //populatePotCollection();
 
@@ -53,6 +55,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Launch the Add Pot activity
+                Intent addPotIntent = EnterPotActivity.makeIntent(MainActivity.this);
+                startActivityForResult(addPotIntent, REQUEST_CODE_ADDPOT);
+            }
+        });
+    }
+
+    private void setupDeletePotButton() {
+        Button deleteButton = (Button) findViewById(R.id.action_delete);
+
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Delete the selected pot
                 Intent addPotIntent = EnterPotActivity.makeIntent(MainActivity.this);
                 startActivityForResult(addPotIntent, REQUEST_CODE_ADDPOT);
             }
@@ -228,6 +243,7 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
     private void loadSaveData() {
         SharedPreferences prefs = getSharedPreferences("Pot Collection", MODE_PRIVATE);
