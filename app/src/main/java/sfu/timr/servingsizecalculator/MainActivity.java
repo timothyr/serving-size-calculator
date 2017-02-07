@@ -192,12 +192,13 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("Pot Collection", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.clear();
-        if (prefs.getInt("Pot Weight", 0) == 0) {
-            return;
+
+        int i = 0;
+        while (prefs.getInt("Pot Weight" + i, 0) != 0) {
+            Pot pot = new Pot(prefs.getString("Pot Name" + i, ""), prefs.getInt("Pot Weight" + i, 0));
+            pots.addPot(pot);
+            i++;
         }
-        Pot pot = new Pot(prefs.getString("Pot Name", ""), prefs.getInt("Pot Weight", 0));
-        pots.addPot(pot);
-        editor.commit();
     }
 
     private void writeSaveData() {
@@ -206,8 +207,8 @@ public class MainActivity extends AppCompatActivity {
         editor.clear();
         for (int i = 0; i < pots.getPots().size(); i++) {
             Pot pot = pots.getPot(i);
-            editor.putString("Pot Name", pot.getName());
-            editor.putInt("Pot Weight", pot.getWeightInG());
+            editor.putString("Pot Name" + i, pot.getName());
+            editor.putInt("Pot Weight" + i, pot.getWeightInG());
         }
         editor.commit();
     }
