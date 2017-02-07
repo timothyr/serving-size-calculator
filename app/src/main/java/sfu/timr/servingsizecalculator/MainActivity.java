@@ -134,7 +134,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case REQUEST_CODE_EDITPOT:
                 if(resultCode == Activity.RESULT_OK) {
-                    Toast.makeText(MainActivity.this, "POT SUCCESFULLY EDITED", Toast.LENGTH_SHORT).show();
+                    int potIndex = pots.getPotIndex(selectedPot);
+                    if(potIndex == -1) {
+                        break;
+                    }
                     // Get the pot data
                     String potName = data.getStringExtra("POTNAME");
                     Integer potWeight = data.getIntExtra("POTWEIGHT", 0);
@@ -142,8 +145,7 @@ public class MainActivity extends AppCompatActivity {
                     // Create a pot based on data
                     Pot pot = new Pot(potName, potWeight);
 
-                    // Add pot to PotCollection
-                    int potIndex = pots.getPotIndex(selectedPot);
+                    // Change pot in PotCollection
                     pots.changePot(pot, potIndex);
                     writeSaveData();
                 }
