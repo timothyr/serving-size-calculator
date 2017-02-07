@@ -10,10 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * Allows the user to enter the details of a new pot
+ * Used to (1) Add Pot, and (2) Edit Pot
+ */
 public class EnterPotActivity extends AppCompatActivity {
-
-    private String initialName;
-    private int initialPotWeight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +30,8 @@ public class EnterPotActivity extends AppCompatActivity {
         if(!intent.hasExtra(getString(R.string.pot_name))) {
             setupAddPotButton();
         }
-        initialName = intent.getStringExtra(getString(R.string.pot_name));
-        initialPotWeight = intent.getIntExtra(getString(R.string.pot_weight), -1);
+        String initialName = intent.getStringExtra(getString(R.string.pot_name));
+        int initialPotWeight = intent.getIntExtra(getString(R.string.pot_weight), -1);
         setupAddPotButton(initialName, initialPotWeight);
     }
 
@@ -48,7 +49,7 @@ public class EnterPotActivity extends AppCompatActivity {
                 potWeightEditText.setText("" + initialPotWeight);
             }
 
-            addButton.setText("EDIT");
+            addButton.setText(R.string.edit);
         }
 
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -63,10 +64,10 @@ public class EnterPotActivity extends AppCompatActivity {
 
                 try {
                     if (potNameEditText.getText().length() == 0) {
-                        throw new NullPointerException("Invalid Pot Name Size");
+                        throw new NullPointerException(getString(R.string.pot_name_error));
                     }
                 } catch (NullPointerException e) {
-                    Toast.makeText(EnterPotActivity.this, "Pot Name must be at least 1 character", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EnterPotActivity.this, R.string.pot_name_error, Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -74,8 +75,7 @@ public class EnterPotActivity extends AppCompatActivity {
                 try {
                     potWeight = Integer.parseInt(potWeightText);
                 } catch (NumberFormatException e) {
-                    // TODO message on EditText showing error
-                    Toast.makeText(EnterPotActivity.this, "Fill out the form correctly", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EnterPotActivity.this, R.string.pot_weight_error, Toast.LENGTH_SHORT).show();
                     return;
                 }
 

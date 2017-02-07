@@ -25,8 +25,18 @@
     <string name="of_servings"># of Servings</string>
     <string name="testfoodweight">testFoodWeight</string>
     <string name="enter_food_weight">Enter Food Weight</string>
-    <string name="disclaimer1">Implements Optional Features 4.1 through 4.4\r\nTap and hold a Pot to edit/delete</string>
+    <string name="disclaimer1">\nOptional Implementations:\n
+4.1 - Edit Pot\n
+4.2 - Delete Pot\n
+4.3 - Error Checking Input\n
+4.4 - Save Data\n
+4.5 - Action Bar Buttons\n\n
+Tap and hold to edit/delete a Pot\n
+using the Action Bar</string>
     <string name="default_value_of_0">0</string>
+    <string name="edit">EDIT</string>
+    <string name="pot_name_error">Pot Name must be at least 1 character</string>
+    <string name="pot_weight_error">Pot Weight must be a positive number</string>
 
 
 </resources>

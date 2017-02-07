@@ -1,10 +1,9 @@
 package sfu.timr.servingsizecalculator;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -12,6 +11,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+/**
+ * Calculates the serving of food based on pot weight, food weight and number of servings inputted
+ */
 public class CalculateServingActivity extends AppCompatActivity implements TextWatcher {
 
     private String potName;

@@ -40,9 +40,12 @@
 
     <TextView
         android:text="@string/disclaimer1"
-        android:layout_width="358dp"
-        android:layout_height="43dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:id="@+id/disclaimer1"
-        android:layout_gravity="bottom|end" />
+        android:layout_gravity="bottom|end"
+        android:layout_marginTop="56dp"
+        android:textAlignment="textStart"
+        android:textSize="24sp" />
 
 </android.support.design.widget.CoordinatorLayout>

@@ -13,7 +13,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
+/**
+ * Shows the current list of pots
+ * Long press on a pot to edit/delete that pot
+ * Floating add button to add a pot
+ * Shows disclaimer if there are no pots in list
+ */
 public class MainActivity extends AppCompatActivity {
 
     private static final int REQUEST_CODE_ADDPOT  = 1000;
@@ -52,7 +59,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void displayDisclaimerIfPotsEmpty() {
+        TextView disclaimer = (TextView) findViewById(R.id.disclaimer1);
+        if(pots.countPots() > 0) {
+            disclaimer.setVisibility(View.GONE);
+            return;
+        }
+        disclaimer.setVisibility(View.VISIBLE);
+    }
+
     private void clearChoicesAndUpdateListView() {
+        displayDisclaimerIfPotsEmpty();
         ArrayAdapter<Pot> adapter = pots.getArrayAdapter(MainActivity.this);
         ListView list = (ListView) findViewById(R.id.potListView);
         list.clearChoices();
