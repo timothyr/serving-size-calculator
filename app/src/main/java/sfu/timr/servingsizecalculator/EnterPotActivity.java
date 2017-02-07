@@ -12,17 +12,44 @@ import android.widget.Toast;
 
 public class EnterPotActivity extends AppCompatActivity {
 
+    private String initialName;
+    private int initialPotWeight;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_pot);
 
-        setupAddPotButton();
+        extractDataFromIntent();
         setupCancelPotButton();
     }
 
-    private void setupAddPotButton() {
+    private void extractDataFromIntent() {
+        Intent intent = getIntent();
+        if(!intent.hasExtra("Pot Name")) {
+            setupAddPotButton();
+        }
+        initialName = intent.getStringExtra("Pot Name");
+        initialPotWeight = intent.getIntExtra("Pot Weight", -1);
+        setupAddPotButton(initialName, initialPotWeight);
+    }
+
+    private void setupAddPotButton(String initialName, int initialPotWeight) {
         Button addButton = (Button) findViewById(R.id.enter_pot_add_button);
+
+        if(initialName != null || initialPotWeight != -1) {
+            if(initialName != null) {
+                EditText potNameEditText = (EditText) findViewById(R.id.pot_name_entry);
+                potNameEditText.setText(initialName);
+            }
+
+            if(initialPotWeight != -1) {
+                EditText potWeightEditText = (EditText) findViewById(R.id.pot_weight_entry);
+                potWeightEditText.setText("" + initialPotWeight);
+            }
+
+            addButton.setText("EDIT");
+        }
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,6 +89,10 @@ public class EnterPotActivity extends AppCompatActivity {
         });
     }
 
+    private void setupAddPotButton() {
+        setupAddPotButton(null, -1);
+    }
+
     private void setupCancelPotButton() {
         Button cancelButton = (Button) findViewById(R.id.enter_pot_cancel_button);
 
@@ -75,6 +106,13 @@ public class EnterPotActivity extends AppCompatActivity {
 
     public static Intent makeIntent(Context context) {
         return new Intent(context, EnterPotActivity.class);
+    }
+
+    public static Intent makeIntent(Context context, Pot returnPot) {
+        Intent intent = new Intent(context, EnterPotActivity.class);
+        intent.putExtra("Pot Name", returnPot.getName());
+        intent.putExtra("Pot Weight", returnPot.getWeightInG());
+        return intent;
     }
 
 }

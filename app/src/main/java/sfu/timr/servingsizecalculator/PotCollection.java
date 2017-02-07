@@ -20,7 +20,7 @@ public class PotCollection {
     private List<Pot> pots = new ArrayList<>();
 
     public void addPot(Pot pot) {
-        pots.add(0, pot);
+        pots.add(pot);
     }
 
     public void changePot(Pot pot, int indexOfPotEditing) {
@@ -32,6 +32,12 @@ public class PotCollection {
     public int countPots() {
         return pots.size();
     }
+
+    public int getPotIndex(Pot pot) {
+        int index = pots.indexOf(pot);
+        return index;
+    }
+
     public Pot getPot(int index) {
         validateIndexWithException(index);
         return pots.get(index);

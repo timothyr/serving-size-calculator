@@ -19,8 +19,10 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final int REQUEST_CODE_ADDPOT = 1000;
-    public static final int REQUEST_CODE_SERVING = 2000;
+    private static final int REQUEST_CODE_ADDPOT  = 1000;
+    private static final int REQUEST_CODE_EDITPOT = 2000;
+    private static final int REQUEST_CODE_SERVING = 3000;
+
     private android.view.ActionMode actionMode;
     private Pot selectedPot;
     // Pot collection array
@@ -114,7 +116,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        clearChoicesAndUpdateListView();
         switch (requestCode) {
             case REQUEST_CODE_ADDPOT:
                 if(resultCode == Activity.RESULT_OK) {
@@ -130,7 +131,33 @@ public class MainActivity extends AppCompatActivity {
                     writeSaveData();
 
                 }
+                break;
+            case REQUEST_CODE_EDITPOT:
+                if(resultCode == Activity.RESULT_OK) {
+                    Toast.makeText(MainActivity.this, "POT SUCCESFULLY EDITED", Toast.LENGTH_SHORT).show();
+                    // Get the pot data
+                    String potName = data.getStringExtra("POTNAME");
+                    Integer potWeight = data.getIntExtra("POTWEIGHT", 0);
+
+                    // Create a pot based on data
+                    Pot pot = new Pot(potName, potWeight);
+
+                    // Add pot to PotCollection
+                    int potIndex = pots.getPotIndex(selectedPot);
+                    pots.changePot(pot, potIndex);
+                    writeSaveData();
+                }
+                break;
         }
+        clearChoicesAndUpdateListView();
+        actionMode.finish();
+    }
+
+    private void editSelectedPot() {
+        Intent EditPotIntent = EnterPotActivity.makeIntent(
+                MainActivity.this,
+                selectedPot);
+        startActivityForResult(EditPotIntent, REQUEST_CODE_EDITPOT);
     }
 
     private class ActionModeCallback implements android.view.ActionMode.Callback {
@@ -154,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
             // Handle item selection
             switch (menuItem.getItemId()) {
                 case R.id.action_edit:
-                    Toast.makeText(MainActivity.this, "EDIT " + selectedPot.getName(), Toast.LENGTH_SHORT).show();
+                    editSelectedPot();
                     return true;
                 case R.id.action_delete:
                     Toast.makeText(MainActivity.this, "DELETE " + selectedPot.getName(), Toast.LENGTH_SHORT).show();
@@ -206,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
         editor.clear();
 
         int i = 0;
-        while (prefs.getInt("Pot Weight" + i, 0) != 0) {
+        while (prefs.getInt("Pot Weight" + i, -1) != -1) {
             Pot pot = new Pot(prefs.getString("Pot Name" + i, ""), prefs.getInt("Pot Weight" + i, 0));
             pots.addPot(pot);
             i++;
