@@ -25,6 +25,7 @@
     <string name="of_servings"># of Servings</string>
     <string name="testfoodweight">testFoodWeight</string>
     <string name="enter_food_weight">Enter Food Weight</string>
+    <string name="disclaimer1">Implements Optional Features 4.1 through 4.4\r\nTap and hold a Pot to edit/delete</string>
 
 
 </resources>
