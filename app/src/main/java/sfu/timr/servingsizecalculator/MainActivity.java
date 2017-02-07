@@ -127,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                     // Add pot to PotCollection
                     pots.addPot(pot);
                     clearChoicesAndUpdateListView();
+                    writeSaveData();
                 }
         }
     }
@@ -189,14 +190,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void loadSaveData() {
         SharedPreferences prefs = getSharedPreferences("Pot Collection", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        if (prefs.getInt("Pot Weight", 0) == 0) {
+            return;
+        }
         Pot pot = new Pot(prefs.getString("Pot Name", ""), prefs.getInt("Pot Weight", 0));
         pots.addPot(pot);
+        editor.commit();
     }
 
     private void writeSaveData() {
         SharedPreferences prefs = getSharedPreferences("Pot Collection", MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
-        for (Pot pot: pots.getPots()) {
+        editor.clear();
+        for (int i = 0; i < pots.getPots().size(); i++) {
+            Pot pot = pots.getPot(i);
             editor.putString("Pot Name", pot.getName());
             editor.putInt("Pot Weight", pot.getWeightInG());
         }
