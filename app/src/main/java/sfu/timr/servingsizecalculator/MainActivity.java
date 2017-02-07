@@ -2,6 +2,7 @@ package sfu.timr.servingsizecalculator;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        loadSaveData();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -38,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         //populatePotCollection();
 
         clearChoicesAndUpdateListView();
+        writeSaveData();
         registerClickCallback();
     }
 
@@ -184,4 +187,19 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void loadSaveData() {
+        SharedPreferences prefs = getSharedPreferences("Pot Collection", MODE_PRIVATE);
+        Pot pot = new Pot(prefs.getString("Pot Name", ""), prefs.getInt("Pot Weight", 0));
+        pots.addPot(pot);
+    }
+
+    private void writeSaveData() {
+        SharedPreferences prefs = getSharedPreferences("Pot Collection", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        for (Pot pot: pots.getPots()) {
+            editor.putString("Pot Name", pot.getName());
+            editor.putInt("Pot Weight", pot.getWeightInG());
+        }
+        editor.commit();
+    }
 }

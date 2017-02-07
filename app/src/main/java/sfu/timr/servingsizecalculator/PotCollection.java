@@ -1,6 +1,7 @@
 package sfu.timr.servingsizecalculator;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +35,10 @@ public class PotCollection {
     public Pot getPot(int index) {
         validateIndexWithException(index);
         return pots.get(index);
+    }
+
+    public List<Pot> getPots() {
+        return this.pots;
     }
 
     // Useful for integrating with an ArrayAdapter
